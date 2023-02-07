@@ -42,6 +42,9 @@ Markdown = ">=3.3"
 importlib-metadata = "^4.12.0"
 
 
+[tool.poetry.group.dev.dependencies]
+testcontainers = "^3.7.1"
+
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"

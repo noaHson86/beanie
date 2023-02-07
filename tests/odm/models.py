@@ -22,6 +22,7 @@ from pydantic import (
     SecretBytes,
     SecretStr,
     condecimal,
+    UUID4,
 )
 from pydantic.color import Color
 from pymongo import IndexModel
@@ -387,6 +388,25 @@ class DocumentWithExtras(Document):
 
 class DocumentWithExtrasKw(Document, extra=Extra.allow):
     num_1: int
+
+
+class GenericFile(Document):
+    id: Indexed(UUID4) = Field(default_factory=uuid4)
+
+
+class Picture(BaseModel):
+    file: Link[GenericFile]
+
+
+class Comment(Document):
+    text: str
+
+
+class Post(Document):
+    id: Indexed(UUID4) = Field(default_factory=uuid4)
+    text: str
+    picture: Optional[Picture]
+    comments: List[Link[Comment]] = Field(default_factory=list)
 
 
 class Yard(Document):
